@@ -1,0 +1,10 @@
+<%= form_tag create_answer_wine_game_user_path(@game_user.wine, @game_user, question_position: @question.position), method: :post, class:"gauge" do %>
+  <%= hidden_field_tag "user_answer[question_id]", @question.id %>
+  <% @answers.reverse.each do |answer| %>
+    <div class="text-center range-radio">
+      <%= radio_button_tag "user_answer[answer]", answer.id, id: "user-answer-#{answer.id}" %>
+      <%= label_tag "user_answer[answer]", answer.value, for: "user_answer_answer_#{answer.id}", class:'btn' %>
+    </div>
+  <% end %>
+  <%= submit_tag "Je valide", class: "bouton-submit" %>
+<% end %>

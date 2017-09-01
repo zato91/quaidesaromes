@@ -1,0 +1,8 @@
+<div class="wine-show-header">
+  <div class="container">
+    <div class="wine-show-img" style="background-image: url('<%= @wine.photo ? cl_image_path(@wine.photo.path, :crop => :fill) : asset_path('temp_wine_img.png') %>')">
+    </div>
+  </div>
+</div>
+
+<%= render 'update_form' %>

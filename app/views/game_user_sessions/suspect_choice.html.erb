@@ -1,0 +1,51 @@
+<%= render 'radar_chart' %>
+<div class="container">
+  <div class="row">
+    <div class="owl-carousel">
+      <% @game_suspects.each_with_index do | suspect, index | %>
+        <div class="col-xs-12 full-size-container">
+          <div class='suspect-card-container'>
+            <div class='suspect-card'>
+              <div class="suspect-card-body">
+                <div class='suspect-card-header' style='background-image: url("<%= cl_image_path(suspect.suspect.photo_freaky.path, :quality => 75) %>")'>
+                </div>
+                <div class="suspect-card-title text-center">
+                  <h4 class="font-courier font-upper">Suspect n°<%= index + 1 %></h4>
+                  <h3 class="font-impact"><%= suspect.suspect.name %></h3>
+                </div>
+              <!-- </div> -->
+
+              <!-- <div class='suspect-card-body text-center'> -->
+                <div class="color-aroma text-center">
+                  <div class="color-aroma-item red-list">
+                    <ul class="list-unstyled">
+                      <li class="font-courier font-upper">
+                        Ta dégustation
+                      </li>
+                      <li class="font-bold">
+                        <%= @tasting_color %>, <%= @aromas_family %>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="color-aroma-item blue-list">
+                    <ul class="list-unstyled">
+                      <li class="font-courier font-upper">
+                        Vin du suspect
+                      </li>
+                      <li class="font-bold">
+                        <%= suspect.wine.tasting_color %>, <%= Aroma.where(id: suspect.aroma_id).first.name %>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <canvas id="radarChart<%= index + 1 %>" class="canvas-card"></canvas>
+                <%= link_to 'Désigner comme coupable ?', endgame_wine_game_user_game_user_session_path(@game.wine, @game_user, @game_user_session, suspect_id: suspect.id), class: 'suspect-card-bottom' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

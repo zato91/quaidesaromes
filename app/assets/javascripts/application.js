@@ -1,0 +1,12 @@
+//= require jquery
+//= require jquery_ujs
+//= require chart.min.js
+//= require bootstrap-sprockets
+//= require jquery-fileupload/basic
+//= require cloudinary/jquery.cloudinary
+//= require attachinary
+//= require owl.carousel
+//= require social-share-button
+//= require suspect_choice
+//= require liquidFillGauge.js
+//= require_tree .

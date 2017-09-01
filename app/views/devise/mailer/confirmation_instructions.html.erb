@@ -1,0 +1,5 @@
+<p>Bonjour <%= @email %>!</p>
+
+<p>Tu peux confirmer ton compte "36 quai des arômes" en cliquant là :</p>
+
+<p><%= link_to 'Clique moi fort!', confirmation_url(@resource, confirmation_token: @token) %></p>

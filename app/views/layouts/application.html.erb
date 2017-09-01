@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'shared/meta_tags' %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= render 'layouts/analytics' %>
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <style>
+        .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+    </style>
+  </head>
+  <body class="<%=controller_name%>-<%=action_name%>">
+
+    <%= render 'shared/flashes' %>
+    <%= render 'shared/navbar' %>
+    <%= yield %>
+    <%= render 'shared/footer' %>
+
+    <%= javascript_include_tag 'application' %>
+    <%= yield :after_js %>
+    <%= cloudinary_js_config %>
+  </body>
+</html>

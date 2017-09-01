@@ -1,0 +1,65 @@
+/* Special displays */
+.sessions-new,
+.registrations-new,
+.passwords-new,
+.passwords-create,
+.registrations-create {
+  #footer {
+    display: none;
+  }
+}
+
+/* Main classes */
+#footer {
+  background: $red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  // position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.footer-left {
+  padding-left: 10px;
+}
+.footer-social-text h3{
+  font-size: 24px;
+  font-family: 'Impact', 'Oswald', sans-serif;
+  color: white;
+}
+.footer-social-dot {
+  background-color: $yellow;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 5px;
+  text-align: center;
+  a {
+    text-align: center;
+    margin-bottom: 1px;
+  }
+  a:hover,
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+}
+.social-dot {
+  color: black;
+  font-size: 23px;
+  line-height: 1.3em;
+}
+.footer-warning {
+  text-align: right;
+  h5 {
+    font-size: 10px;
+    font-weight: bold;
+    margin: 0;
+  }
+  p {
+    font-size: 9px;
+    color: white;
+    margin: 0;
+  }
+}

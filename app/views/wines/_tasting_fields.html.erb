@@ -1,0 +1,14 @@
+<fieldset>
+  <%= f.hidden_field :taster_name, value: current_user.first_name %>
+  <%= f.input :color, label: "Couleur" %>
+  <%= f.input :sweetness, label: "Douceur", collection: 1..5 %>
+  <%= f.input :acidity, label: "Acidité", collection: 1..5 %>
+  <%= f.input :tannins, label: "Tannins", collection: 0..5 %>
+  <%= f.input :body, label: "Corps", collection: 1..5 %>
+  <%= f.input :length, label: "Longueur", collection: 1..5 %>
+  <h2 class="text-center">Les arômes</h2>
+  <%= f.simple_fields_for :tasting_aromas do |tasting_aroma| %>
+    <%= render 'tasting_aroma_fields', f: tasting_aroma %>
+  <% end %>
+  <%= link_to_add_fields "Ajouter 1 arôme", f, :tasting_aromas %>
+</fieldset>

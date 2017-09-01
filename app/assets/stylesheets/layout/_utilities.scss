@@ -1,0 +1,65 @@
+/* -------------------------------------
+ * Utilities classes
+ * These are examples of utilities classes
+ * Feel free to change them and create your own
+ * ------------------------------------- */
+
+.kill-margin {
+  margin: 0;
+  padding: 0;
+}
+
+// Paddings
+.padded {
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+.medium-padded {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.small-padded {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+// Margins
+.marged {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.marg-l {
+  margin-left: 5px;
+}
+.marg-r {
+  margin-right: 5px;
+}
+// Backgrounds
+.bg-dark-grey {
+  background: $dark-grey;
+}
+
+// Fonts
+.font-courier {
+  font-family: 'Courier', 'Cousine', sans-serif;
+}
+.font-impact {
+  font-family: 'Impact', 'Oswald', sans-serif;
+}
+.font-bold {
+  font-weight: bold;
+}
+.font-upper {
+  text-transform: uppercase;
+}
+.border-right {
+  border-right: 2px solid grey;
+}
+.border-left {
+  border-left: 2px solid grey;
+}
+.border-bottom {
+  border-bottom: 4px solid grey;
+}
+.border-top {
+  border-top: 4px solid grey;
+}

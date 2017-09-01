@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+      <%= simple_form_for @wine do |f| %>
+        <h2 class="text-center">Le vin</h2>
+        <%= f.input :estate, label: "Domaine" %>
+        <%= f.input :cuvee, label: "Cuvée" %>
+        <%= f.input :label, label: "Appelation" %>
+        <%= f.input :region, label: "Région" %>
+        <%= f.input :country, label: "Pays", priority: [ "France","Spain", "Italy", "Germany", "Australia", "New Zealand", "United States", "Chile" ] %>
+        <%= f.input :vintage, label: "Millésime", input_html: { value: 2014 }  %>
+        <%= f.input :grape_varieties, label: "Cépages" %>
+        <%= f.input :color, collection: ['Blanc', 'Rouge', 'Rosé'], label: "Couleur type" %>
+        <%= f.input :volume, label: "Volume", input_html: { value: 75 } %>
+        <%= f.input :alcohol_percentage, label: "Alcool %", input_html: { value: 13.5 } %>
+        <%= f.simple_fields_for :tastings do |tasting| %>
+        <h2 class="text-center">La dégustation</h2>
+          <%= render 'tasting_fields', f: tasting %>
+        <% end %>
+        <h2 class="text-center">La photo</h2>
+        <%= f.input :photo, as: :attachinary %>
+      </br>
+        <div class="text-center"><span class="flex padded-top padded-bot"><%= f.button :submit, "#{@submit_label}", class: "btn btn-primary" %></span></div>
+      <% end %>
+      </br>
+      </br>
+    </div>
+  </div>
+</div>

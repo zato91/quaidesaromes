@@ -1,0 +1,23 @@
+.alert-info {
+  background-color: $yellow !important;
+  min-width: 33%;
+}
+.alert {
+  color: black !important;
+  position: absolute;
+  font-family: 'Courier', 'Cousine', sans-serif;
+  padding: 1px 25px;
+  margin: 0;
+  margin-top: 14px !important;
+  border: none;
+  z-index: 2000;
+}
+@media(max-width: 480px) {
+  .alert {
+    position: relative;
+    margin-top: 0 !important;
+  }
+}
+.close {
+  display: none;
+}

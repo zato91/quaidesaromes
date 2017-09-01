@@ -1,0 +1,14 @@
+<div class="wine-show-header">
+  <div class="container">
+    <div class="wine-show-img" style="background-image: url('<%= @wine.photo ? cl_image_path(@wine.photo.path, :crop => :fill) : asset_path('temp_wine_img.png') %>')">
+    </div>
+  </div>
+</div>
+<div class="wine-show-form text-center">
+  <%= simple_form_for [@wine, @game_user] do |f| %>
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= f.input :password, label: "Choisis un mot de passe qui tue!", placeholder: "" %>
+    </div>
+    <%= f.submit "Nouvelle partie", class: "sign-btn game-btn" %>
+  <% end %>
+</div>

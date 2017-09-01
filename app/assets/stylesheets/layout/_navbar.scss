@@ -1,0 +1,139 @@
+.dropdown-menu {
+  &.is-active {
+    display: block;
+  }
+}
+
+/* Special displays */
+.pages-home {
+  .navbar-wagon-brand {
+    opacity: 0;
+  }
+}
+.navbar-back {
+  display: none;
+}
+.wines-index, .wines-show, .wines-new, .wines-edit, .game_user_sessions-set_game, .game_users-index {
+  .navbar-wagon-brand {
+    display: none;
+  }
+  .navbar-back {
+    display: block;
+    font-size: 15px;
+    font-weight: lighter;
+    line-height: $navbar-height;
+    color: $yellow;
+    padding-left: 10px;
+  }
+}
+.sessions-new,
+.registrations-new,
+.passwords-new,
+.passwords-create,
+.registrations-create {
+  .navbar-wagon-right {
+    display: none;
+  }
+}
+/* Main class */
+.navbar-wagon {
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  height: $navbar-height;
+  padding: 0px 0px;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Navbar logo */
+.navbar-wagon-brand img {
+  width: 100px;
+  margin-left: 5px;
+}
+
+/* Navbar right section (with form, links, button) */
+.navbar-wagon-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Navbar item */
+.navbar-wagon-item {
+  flex: 0 1 auto;
+  cursor: pointer;
+  padding: 0 20px 0 10px;
+  color: $yellow;
+}
+
+/* Navbar standard link */
+.navbar-wagon-link {
+  color: $yellow;
+  font-size: 15px;
+  font-family: 'Impact', 'Oswald', sans-serif;
+  font-weight: light;
+}
+.navbar-wagon-link:hover,
+.navbar-wagon-link:focus {
+  color: $yellow;
+  text-decoration: none;
+}
+
+/* Navbar search form */
+.navbar-wagon-search {
+  flex: 0 1 300px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 10px;
+  position: relative;
+}
+.navbar-wagon-search-btn {
+  line-height: 40px;
+  color: #616668;
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 14px;
+  top: -2px;
+  z-index: 1;
+}
+.navbar-wagon-search-input {
+  flex: 0 1 300px;
+  transition: all 0.15s ease;
+  line-height: 40px;
+  font-weight: lighter;
+  color: #616668;
+  border: 1px solid #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 14px;
+  outline: none;
+}
+.navbar-wagon-search-input:focus  {
+  border: 1px solid #CCCCCC;
+}
+
+/* Navbar dropdown menu */
+.navbar-wagon-dropdown-menu li > a {
+  transition: color 0.3s ease;
+  font-weight: lighter !important;
+  color: black !important;
+  font-size: 2vh !important;
+  line-height: 2.2vh !important;
+  padding: 5px 25px;
+  background: white;
+  text-align: right;
+  font-family: 'Courier', 'Cousine', sans-serif;
+}
+.navbar-wagon-dropdown-menu li > a:hover {
+  background: $red !important;
+  color: white !important;
+}
+.navbar-wagon-dropdown-menu:before {
+  position: absolute;
+  right: 10px;
+  top: -6px;
+}

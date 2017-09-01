@@ -1,0 +1,245 @@
+<%= render 'pro_endgame_radar_chart' %>
+<div class="wrapper-quizz">
+  <div class="container kill-margin">
+    <div class="quizz-endgame-content">
+      <div class="quizz-endgame-content-top">
+        <div class="quizz-header">
+          <h3 class="text-center">Le jeu est fini !</h3>
+        </div>
+        <div class="quizz-endgame">
+          <% if @game_user_session.win%>
+            <%= render 'endgame_win' %>
+          <% else %>
+            <%= render 'endgame_lose' %>
+          <% end %>
+        </div>
+        <div class="quizz-endgame-score text-center">
+          <div class="win-lose-title">
+            <h3>Chapître 2 : l'enquête</h3>
+          </div>
+          <div class="win-lose">
+            <div class="win-lose-content">
+              <svg id="fillgauge1" width="15vh" height="15vh"></svg>
+            </div>
+            <div class="win-lose-content">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+            <div class="win-lose-content">
+              <% if @game_user_session.win %>
+                <h2><%= @game_user_session.final_score - @game_user_session.provisional_score - 300 %> pts</h2>
+              <% else %>
+                <h2><%= @game_user_session.final_score - @game_user_session.provisional_score %> pts</h2>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="quizz-endgame-score text-center">
+          <div class="win-lose-title">
+            <h3>Chapître 1 : le recrutement</h3>
+          </div>
+          <div class="win-lose">
+            <div class="win-lose-content">
+              <h2><%= @game_user_session.provisional_score/100 %> bonnes réponses</h2>
+            </div>
+            <div class="win-lose-content">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+            <div class="win-lose-content">
+              <h2><%= @game_user_session.provisional_score %> pts</h2>
+            </div>
+          </div>
+        </div>
+        <% if @game.game_category == 3 %>
+          <div class="quizz-endgame-ranking text-center">
+        <% else %>
+          <div class="quizz-endgame-ranking-bottom text-center">
+        <% end %>
+          <% if @players.count == 1 %>
+            <div class="win-lose-title">
+              <h3>Total des points</h3>
+            </div>
+            <div class="win-lose">
+              <div class="win-lose-content">
+                <h2><%= @game_user_session.final_score %> pts</h2>
+              </div>
+              <div class="win-lose-content">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </div>
+              <div class="win-lose-content">
+                <% if @game_user_session.final_score > 1000 %>
+                  <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                <% else %>
+                  <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <div class="win-lose-title">
+              <h3>Classement final</h3>
+            </div>
+            <table class="table table-condensed">
+              <% @players.each_with_index do |player, index| %>
+                <% if player.user == current_user %>
+                  <tr class="success">
+                <% else %>
+                  <tr>
+                <% end %>
+                  <td><h2><%= index + 1 %> - </h2></td>
+                  <% if player.user.picture %>
+                    <td><img src="<%= player.user.picture %>" alt="user" class="avatar-large"></td>
+                  <% else %>
+                    <td><div class="avatar-large"></div></td>
+                  <% end %>
+                  <% if player.user.first_name %>
+                    <td><h2><%= player.user.first_name.downcase.capitalize %></h2></td>
+                  <% else %>
+                    <% username = player.user.email.match(/^[^\@]*/) %>
+                    <td><h2>@<%= username %></h2></td>
+                  <% end %>
+                  <td><h2><%= player.final_score %> pts</h2></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% end %>
+        <% if @game_user.game.game_category.id == 3 %>
+          <div class="quizz-endgame-ranking text-center">
+              <h3 class="font-impact">Vin n°1
+              <% if @game_suspect_1.wine == @game_suspect.wine %>
+                (Coupable)
+              <% end %>
+              </h3>
+              <h2 class="font-impact">
+                <%= @game_suspect_1.wine.label %> -
+                <% if @game_suspect_1.wine.estate == "" %>
+                  <%= @game_suspect_1.wine.country %> -
+                <% else %>
+                  <%= @game_suspect_1.wine.estate %> -
+                <% end %>
+                <%= @game_suspect_1.wine.vintage %></h2>
+            <div class="color-aroma text-center">
+              <div class="color-aroma-item red-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Ta dégustation
+                  </li>
+                  <li class="font-bold">
+                    <%= @tasting_color_tasting_1 %>, <%= @aromas_family_tasting_1 %>
+                  </li>
+                </ul>
+              </div>
+              <div class="color-aroma-item blue-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Vin suspect n°1
+                  </li>
+                  <li class="font-bold">
+                    <%= @game_suspect_1.wine.tasting_color %>, <%= Aroma.where(id: @game_suspect_1.aroma_id).first.name %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="win-lose-title">
+              <canvas id="radarChart1" class="canvas-card"></canvas>
+            </div>
+          </div>
+          <div class="quizz-endgame-ranking text-center">
+              <h3 class="font-impact">Vin n°2
+              <% if @game_suspect_2.wine == @game_suspect.wine %>
+                (Coupable)
+              <% end %>
+              </h3>
+              <h2 class="font-impact">
+                <%= @game_suspect_2.wine.label %> -
+                <% if @game_suspect_2.wine.estate == "" %>
+                  <%= @game_suspect_2.wine.country %> -
+                <% else %>
+                  <%= @game_suspect_2.wine.estate %> -
+                <% end %>
+                <%= @game_suspect_2.wine.vintage %></h2>
+            <div class="color-aroma text-center">
+              <div class="color-aroma-item red-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Ta dégustation
+                  </li>
+                  <li class="font-bold">
+                    <%= @tasting_color_tasting_2 %>, <%= @aromas_family_tasting_2 %>
+                  </li>
+                </ul>
+              </div>
+              <div class="color-aroma-item blue-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Vin suspect n°2
+                  </li>
+                  <li class="font-bold">
+                    <%= @game_suspect_2.wine.tasting_color %>, <%= Aroma.where(id: @game_suspect_2.aroma_id).first.name %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="win-lose-title">
+              <canvas id="radarChart2" class="canvas-card"></canvas>
+            </div>
+          </div>
+          <div class="quizz-endgame-ranking text-center">
+              <h3 class="font-impact">Vin n°3
+              <% if @game_suspect_3.wine == @game_suspect.wine %>
+                (Coupable)
+              <% end %>
+              </h3>
+              <h2 class="font-impact">
+                <%= @game_suspect_3.wine.label %> -
+                <% if @game_suspect_3.wine.estate == "" %>
+                  <%= @game_suspect_3.wine.country %> -
+                <% else %>
+                  <%= @game_suspect_3.wine.estate %> -
+                <% end %>
+                <%= @game_suspect_3.wine.vintage %></h2>
+            <div class="color-aroma text-center">
+              <div class="color-aroma-item red-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Ta dégustation
+                  </li>
+                  <li class="font-bold">
+                    <%= @tasting_color_tasting_3 %>, <%= @aromas_family_tasting_3 %>
+                  </li>
+                </ul>
+              </div>
+              <div class="color-aroma-item blue-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Vin suspect n°3
+                  </li>
+                  <li class="font-bold">
+                    <%= @game_suspect_3.wine.tasting_color %>, <%= Aroma.where(id: @game_suspect_3.aroma_id).first.name %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="win-lose-title">
+              <canvas id="radarChart3" class="canvas-card"></canvas>
+            </div>
+          </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @game_user.game.game_category.id == 1 %>
+  <div class="text-center quizz-endgame-content-bottom">
+    <div class="quizz-endgame-content-indice">
+     <%= link_to "Retour vers l'historique", wine_game_user_game_user_sessions_path(:wine, :game_user), class:'indice-click' %>
+    </div>
+  </div>
+<% end %>
+<% content_for(:after_js) do %>
+  <script type="text/javascript">
+    var gauge1 = loadLiquidFillGauge("fillgauge1", <%= @game_user_session.score %>);
+    var config1 = liquidFillGaugeDefaultSettings();
+  </script>
+<% end %>
+

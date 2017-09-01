@@ -1,0 +1,29 @@
+<%= form_tag create_answer_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: @question_game.position), method: :post,class:"qcm" do %>
+  <%= hidden_field_tag "user_answer[question_game_id]", @question_game.id %>
+  <% @answer_games.each do |answer_game| %>
+    <div class="radio-button text-center">
+      <%= radio_button_tag "user_answer[answer_game]", answer_game.id %>
+      <%= label_tag "user_answer[answer_game]", answer_game.answer.title || answer_game.answer.value, class: 'bouton' %>
+    </div>
+  <% end %>
+<% end %>
+<div class="text-center quizz-content-bottom">
+    <%= link_to "INDICES", "#", class:'quizz-content-indice' %>
+    <p><%= @question.tips %></p>
+</div>
+
+<% content_for(:after_js) do %>
+	<%= javascript_tag do %>
+	$('label').on('click', function(event){
+    var $this = $(this)
+    $this.addClass('answered');
+    $this.siblings('input').prop("checked", true);
+    setTimeout(function() {
+      $this.closest('form').submit();
+    }, 1000);
+	});
+  $('.quizz-content-bottom').click(function(){
+    $(this).toggleClass('open')
+  })
+  <% end %>
+<% end %>

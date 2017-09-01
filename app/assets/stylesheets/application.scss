@@ -1,0 +1,22 @@
+// Graphical variables
+@import "config/animation";
+@import "config/variables";
+@import "config/bootstrap_variables";
+
+// External libraries
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+// Your CSS
+@import "layout/index";
+@import "components/index";
+@import "pages/index";
+@import "vendor/index";
+@import "wines/index";
+@import "game_users/index";
+@import "devise/index";
+
+@import "owl.carousel";
+@import "owl.theme";

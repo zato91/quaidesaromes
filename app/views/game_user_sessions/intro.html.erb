@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="control-format">
+      <div class="owl-carousel">
+        <div class="col-xs-12 full-size-container">
+          <div class='item-full-size carousel-left' style="background-image: url('<%= asset_path("carousel_1.jpg") %>')"></div>
+          <div class='item-full-size-text'>
+            <div class="item-full-size-text-element">
+              <h3>Chapître 2 : L'enquête</h3></br>
+              </br>
+              <h4>Vous êtes assistant d’un oenologue qui aide la police à résoudre des enquêtes. Très occupé, il vous demande de l’aide sur un cas épineux.</h4>
+            </div>
+          </div>
+          <div class="carousel-caption button-intro">
+            <%= link_to "Passer l'intro (1/6)", play_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: 10) , class:"carousel-btn" %>
+          </div>
+        </div>
+        <div class="col-xs-12 full-size-container">
+          <div class='item-full-size' style="background-image: url('<%= asset_path("carousel_2.jpg") %>')">
+          </div>
+          <div class='item-full-size-text'>
+            <h4>
+            Un grand chef d’entreprise a été retrouvé dans son bureau, assassiné après une réception improvisée. Il aurait gouté un vin empoisonné retrouvé à côté du corps. Une bouteille non empoisonnée de ce vin vous a été livrée.
+            </h4>
+          </div>
+          <div class="carousel-caption button-intro">
+            <%= link_to "Passer l'intro (2/6)", play_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: 10) , class:"carousel-btn" %>
+          </div>
+        </div>
+        <div class="col-xs-12 full-size-container">
+          <div class='item-full-size' style="background-image: url('<%= asset_path("carousel_3.jpg") %>')">
+          </div>
+          <div class='item-full-size-text'>
+            <h4>
+            Votre boss vous demande de déguster ce vin et de le comparer à son analyse de 3 vins retrouvés dans les verres de 3 suspects. Si 1 des suspects buvait le même vin que celui retrouvé sur les lieux du crime, nous aurions notre homme.
+            </h4>
+          </div>
+          <div class="carousel-caption button-intro">
+            <%= link_to "Passer l'intro (3/6)", play_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: 10) , class:"carousel-btn" %>
+          </div>
+        </div>
+        <div class="col-xs-12 full-size-container">
+          <div class='item-full-size' style="background-image: url('<%= cl_image_path(@suspect_1.photo_freaky.path) %>')">
+          </div>
+          <div class='suspect_text'>
+            <h4>
+            <%= @suspect_1.name %> : <%= @suspect_1.description %>
+            </h4>
+          </div>
+          <div class="carousel-caption button-intro">
+            <%= link_to "Passer l'intro (4/6)", play_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: 10) , class:"carousel-btn" %>
+          </div>
+        </div>
+        <div class="col-xs-12 full-size-container">
+
+            <div class='item-full-size' style="background-image: url('<%= cl_image_path(@suspect_2.photo_freaky.path) %>')">
+            </div>
+            <div class='suspect_text'>
+              <h4>
+              <%= @suspect_2.name %> : <%= @suspect_2.description %>
+              </h4>
+            </div>
+            <div class="carousel-caption button-intro">
+              <%= link_to "Passer l'intro (5/6)", play_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: 10) , class:"carousel-btn" %>
+            </div>
+        </div>
+        <div class="col-xs-12 full-size-container">
+          <div class='item-full-size' style="background-image: url('<%= cl_image_path(@suspect_3.photo_freaky.path) %>')">
+          </div>
+          <div class='suspect_text'>
+            <h4>
+            <%= @suspect_3.name %> : <%= @suspect_3.description %>
+            </h4>
+          </div>
+          <div class="carousel-caption button-intro">
+            <%= link_to "Jouer maintenant", play_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: 10) , class:"carousel-btn" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

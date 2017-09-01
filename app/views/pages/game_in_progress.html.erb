@@ -1,0 +1,114 @@
+<div class="wine-banner">
+  <div class="wine-banner-content">
+    <div class='wine-punchline-container'>
+      <div class="home-punchline punch-bottom">
+        <h3>JE VEUX JOUEEEEEER!!</h3>
+      </div>
+    </div>
+   </div>
+</div>
+
+<div class="game-cards">
+  <div class="game-title">
+    <h3>Jouer maintenant à mes parties en attente</h3>
+  </div>
+  <ul class="list-unstyled list">
+    <% if @my_gips != nil %>
+      <% @my_gips.each do |gip| %>
+        <li class="list__item">
+          <figure class="list__item__inner">
+            <%#= link_to "#" do %>
+              <div class="game-card-hover">
+                <div class="game-card-img-dashed">
+                  <div class="game-card-img" style="background-image: url('<%= gip.wine.photo ? cl_image_path(gip.wine.photo.path) : asset_path('temp_wine_img.png') %>')">
+                    <% if gip.user.picture %>
+                    <img src="<%= gip.user.picture %>" alt="user" class="avatar-large">
+                    <% end %>
+                  </div>
+                </div>
+                <figcaption>
+                  <div class="game-card">
+                    <div class="game-card-content">
+                      <h3><%= gip.game.wine.label %></h3>
+                      <h4><%= gip.game.wine.region %>, <%= gip.game.wine.country.capitalize %></h4>
+                      <p><%= gip.game.wine.vintage %></p>
+                    </div>
+                    <div class="game-card-content-left">
+                      <h3>Leader du jeu</h3>
+                      <h4>
+                      <% if gip.user.first_name %>
+                        <%= gip.user.first_name.downcase.capitalize %>
+                      <% else %>
+                        <%= gip.user.email %>
+                      <% end %>
+                      </h4>
+                    </div>
+                  </div>
+                </figcaption>
+              </div>
+            <%# end %>
+          </figure>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <div class="game-title">
+    <h3>Rejoindre une partie</h3>
+  </div>
+  <ul class="list-unstyled list">
+    <% if @gips != nil %>
+      <% @gips.each do |gip| %>
+        <li class="list__item">
+          <figure class="list__item__inner">
+            <%#= link_to "#" do %>
+              <div class="game-card-hover">
+                <div class="game-card-img-dashed">
+                  <div class="game-card-img" style="background-image: url('<%= gip.wine.photo ? cl_image_path(gip.wine.photo.path) : asset_path('temp_wine_img.png') %>')">
+                    <% if gip.user.picture %>
+                    <img src="<%= gip.user.picture %>" alt="user" class="avatar-large">
+                    <% end %>
+                  <!-- <div class="game-card-color"> -->
+                    <%# if gip.wine.color.capitalize == "Rouge" %>
+                      <!-- <div class="game-dot dot-red"></div> -->
+                    <%# elsif gip.wine.color.capitalize == "Blanc" %>
+                      <!-- <div class="game-dot dot-white"></div> -->
+                    <%# else %>
+                      <!-- <div class="game-dot dot-pink"></div> -->
+                    <%# end %>
+                  <!-- </div> -->
+                  </div>
+                </div>
+                <figcaption>
+                  <div class="game-card">
+                    <div class="game-card-content">
+                      <h3><%= gip.game.wine.label %></h3>
+                      <h4><%= gip.game.wine.region %>, <%= gip.game.wine.country.capitalize %></h4>
+                      <p><%= gip.game.wine.vintage %></p>
+                    </div>
+                    <div class="game-card-content-left">
+                      <h4>
+                      <% if gip.user.first_name %>
+                        <%= gip.user.first_name.downcase.capitalize %>
+                      <% else %>
+                        <%= gip.user.email %>
+                      <% end %>
+                      </h4>
+                    </div>
+                  </div>
+                  <% if gip.user != current_user %>
+                    <div class="wine-show-form text-center">
+                      <%= simple_form_for [gip.game.wine, gip, GameUserSession.new] do |f| %>
+                          <%= f.input :session_password, label: "Donne le mot de passe..." %>
+                          <%= f.submit "SI TU L'OSES!!", class: "sign-btn game-btn" %>
+                        <% end %>
+                    </div>
+                  <% end %>
+                </figcaption>
+              </div>
+            <%# end %>
+          </figure>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,64 @@
+<%= form_tag create_answer_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session, question_position: @question_game.position), method: :post,class:"qcm" do %>
+  <%= hidden_field_tag "user_answer[question_game_id]", @question_game.id %>
+  <%= hidden_field_tag "user_answer[joker_user]", false %>
+  <% @answer_games.each do |answer_game| %>
+    <div class="radio-button text-center">
+      <%= radio_button_tag "user_answer[answer_game]", answer_game.id %>
+      <%= label_tag "user_answer[answer_game]", answer_game.answer.title || answer_game.answer.value, class: 'bouton' %>
+    </div>
+  <% end %>
+<% end %>
+<div id="anicontent"></div>
+<div id="joker50" class="text-center quizz-content-bottom">
+    <%= link_to "SUPER MOIT-MOIT", "#", class:'quizz-content-indice' %>
+</div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $('label').on('click', function(event){
+      var $this = $(this)
+      <% @good = @answer_games.select { |answer|  answer.good_answer == true  }.first.answer_id %>
+      <% @good = Answer.find(@good) %>
+      var good_answer = "<%== escape_javascript @good.value %>"
+      var user_answer = $this.text()
+      if (good_answer === user_answer) {
+        if ($("#user_answer_joker_user").val() === "true") {
+          $('<div class="animated_content animated zoomIn" style="color:green;"><p>+50 pts</p></div>').appendTo('#anicontent');
+          $this.addClass('good-answer')
+        } else {
+          $('<div class="animated_content animated zoomIn" style="color:green;"><p>+100 pts</p></div>').appendTo('#anicontent');
+          $this.addClass('good-answer')
+        }
+      } else {
+        $('<div class="animated_content animated zoomIn" style="color:red;"><p>OUPS</p></div>').appendTo('#anicontent');
+        $this.addClass('bad-answer');
+        $('label').each(function(){
+          if ($(this).text() == good_answer) {
+            $(this).addClass('good-answer')
+          }
+        });
+      }
+      $this.siblings('input').prop("checked", true);
+      setTimeout(function() {
+        $this.closest('form').submit();
+        <!-- $('body').addClass('animated fadeOutLeft'); -->
+      }, 1000);
+    });
+    $('#joker50').on('click', function(event){
+      $("#user_answer_joker_user").val("true");
+      var bottom_button = $(this)
+
+      <% @wrong_answers = @answer_games.select { |answer|  answer.good_answer == false }.sample(2) %>
+      <% @wrong_answer_1 = Answer.find(@wrong_answers[0].answer_id) %>
+      <% @wrong_answer_2 = Answer.find(@wrong_answers[1].answer_id)%>
+      var wrong_answer_1 = "<%== escape_javascript @wrong_answer_1.value %>"
+      var wrong_answer_2 = "<%== escape_javascript @wrong_answer_2.value %>"
+      $('label').each(function(i, item) {
+        if ($(this).text() === wrong_answer_1 || $(this).text() === wrong_answer_2 ) {
+          $(this).addClass('moite-moite');
+          bottom_button.fadeOut();
+        };
+      });
+    });
+  <% end %>
+<% end %>

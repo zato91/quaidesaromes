@@ -1,0 +1,151 @@
+.gu-list {
+  border: 5px dashed #ccc;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  padding: 20px;
+  h4 {
+    color: blac;
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 0;
+  }
+  h5 {
+    color: black;
+  }
+  ul {
+    margin: 0 !important;
+  }
+  li {
+    font-family: 'Courier', 'Cousine', sans-serif;
+    a {
+      color: $red;
+    }
+  }
+}
+@media(max-width: 768px) {
+  .gu-list {
+    h4 {font-size: 16px;}
+  }
+}
+@media(max-width: 480px) {
+  .gu-list {
+    display: block;
+    h4 {font-size: 14px;}
+  }
+}
+@media(max-width: 480px) {
+  .gu-list-content {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+}
+.gu-list-right {
+  display: flex;
+  justify-content: flex-end;
+}
+@media(max-width: 480px) {
+  .gu-list-right {
+    justify-content: center;
+  }
+}
+.gu-list-form {
+  margin: 20px 0;
+  font-size: 20px;
+  font-family: "Courier";
+}
+.gu-list-color {
+  margin-left: 10px;
+}
+.game-btn {
+  height: 6vh;
+  margin: 10px 0;
+  font-size: 2.5vh;
+}
+.game_user_sessions-index {
+  .list-unstyled {
+    h3 {
+      margin: 11px;
+      font-family: 'Courier', 'Cousine', sans-serif;
+      font-size: 3vh;
+      font-weight: bold;
+    }
+    h4 {
+      margin: 2vh 0;
+      font-family: 'Oswald', sans-serif;
+      font-size: 4vh;
+      vertical-align: middle;
+      font-weight: 300;
+    }
+    h5 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 3.5vh;
+    }
+  }
+}
+.game_user_sessions-index{
+  .list__item__inner:hover {
+    background-color: #eeeeee;
+  }
+  .color-aroma {
+    background-color: #eeeeee;
+  }
+}
+.historic-cards {
+  a {
+    text-decoration: none;
+  }
+  .list__item {
+    margin-bottom: 2vh;
+  }
+}
+.historic-card-img {
+  background: #fff center;
+  background-size: cover;
+  width: auto;
+  height: 30vw;
+}
+.historic-card-img-dashed {
+  background: white;
+  border: 4px dashed black;
+  margin: 10px;
+}
+.historic-data {
+  display: flex;
+  justify-content: space-around;
+}
+.historic-item {
+  flex: 0 0 50%;
+  // background-color: grey;
+  // box-shadow: 1px 1px grey
+}
+.historic-item-middle {
+  flex: 0 0 2%;
+  background-color: grey;
+}
+.historic-game-top-card {
+  margin-bottom: 15px;
+  // position: relative;
+}
+.historic-game-bottom-card {
+  display: none;
+}
+.historic-button-container {
+  width: 100%;
+  position: absolute;
+  bottom: -10px;
+  margin: auto;
+  bottom: -12px;
+  left: 0;
+  right: 0;
+}
+.historic-button {
+  font-size: 5vh;
+  width: 4vh;
+  height: 4vh;
+  line-height: 4vh;
+  margin: 0;
+  background-color: white;
+  border-radius: 100%;
+}

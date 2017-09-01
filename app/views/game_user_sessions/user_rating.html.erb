@@ -1,0 +1,26 @@
+<div class="wrapper-quizz">
+  <div class="container kill-margin">
+    <div class="quizz-content">
+
+      <div class="quizz-content-top">
+        <div class="quizz-header">
+          <h3 class="text-center">J'aime ou j'aime pas</h3>
+        </div>
+        <div class="quizz-question text-center">
+          <h4>Avez-vous aimé ce vin ?</h4>
+        </div>
+        <div class="text-center">
+          <%= simple_form_for [@game_user.wine, @game_user, @game_user_session],
+            url: create_rating_wine_game_user_game_user_session_path(@game_user.wine, @game_user, @game_user_session),
+            method: 'post' do |f| %>
+            <%= f.error_notification %>
+            <%= render 'stars' %>
+            <%= f.hidden_field :rating, id: "hiddenRating" %>
+            <%= f.submit "Fin de l'enquête", class: "rating-card-bottom" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

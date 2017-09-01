@@ -1,0 +1,143 @@
+<%= content_for(:after_js) do %>
+  <script>
+    var data1 = {
+        labels: ["Douceur", "Acidité", "Alcool", '<%= @label_4 %>', '<%= @label_5 %>'],
+        datasets: [
+            {
+                label: "Ta dégustation",
+                fillColor: "rgba(199,90,90,0.5)",
+                strokeColor: "rgba(199,90,90,0.5)",
+                pointColor: "rgba(199,90,90,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(199,90,90,1)",
+                data: [<%= @sweetness_suspect_1 %>, <%= @acidity_suspect_1 %>, <%= @alcohol_suspect_1 %>, <%= @data_4_suspect_1 %>, <%= @data_5_suspect_1 %>]
+            },
+            {
+                label: "Coupable",
+                fillColor: "rgba(151,187,205,0.6)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [<%= @sweetness_guilty %>,<%= @acidity_guilty %>,<%= @alcohol_guilty %>,<%= @data_4_guilty %>,<%= @data_5_guilty %>]
+            }
+        ]
+    };
+    var data2 = {
+        labels: ["Douceur", "Acidité", "Alcool", '<%= @label_4 %>', '<%= @label_5 %>'],
+        datasets: [
+            {
+                label: "ta dégustation",
+                fillColor: "rgba(199,90,90,0.5)",
+                strokeColor: "rgba(199,90,90,0.5)",
+                pointColor: "rgba(199,90,90,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(199,90,90,1)",
+                data: [<%= @sweetness_suspect_2 %>, <%= @acidity_suspect_2 %>, <%= @alcohol_suspect_2 %>, <%= @data_4_suspect_2 %>, <%= @data_5_suspect_2 %>]
+            },
+            {
+                label: "Coupable",
+                fillColor: "rgba(151,187,205,0.6)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [<%= @sweetness_guilty %>,<%= @acidity_guilty %>,<%= @alcohol_guilty %>,<%= @data_4_guilty %>,<%= @data_5_guilty %>]
+            }
+        ]
+    };
+    var data3 = {
+        labels: ["Douceur", "Acidité", "Alcool", '<%= @label_4 %>', '<%= @label_5 %>'],
+        datasets: [
+            {
+                label: "ta dégustation",
+                fillColor: "rgba(199,90,90,0.5)",
+                strokeColor: "rgba(199,90,90,0.5)",
+                pointColor: "rgba(199,90,90,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(199,90,90,1)",
+                data: [<%= @sweetness_suspect_3 %>, <%= @acidity_suspect_3 %>, <%= @alcohol_suspect_3 %>, <%= @data_4_suspect_3 %>, <%= @data_5_suspect_3 %>]
+            },
+            {
+                label: "Coupable",
+                fillColor: "rgba(151,187,205,0.6)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [<%= @sweetness_guilty %>,<%= @acidity_guilty %>,<%= @alcohol_guilty %>,<%= @data_4_guilty %>,<%= @data_5_guilty %>]
+            }
+        ]
+    };
+
+
+    var options = {
+        //Boolean - Whether to show lines for each scale point
+        scaleShowLine : true,
+
+        //Boolean - Whether we show the angle lines out of the radar
+        angleShowLineOut : true,
+
+        //Boolean - Whether to show labels on the scale
+        scaleShowLabels : false,
+
+        // Boolean - Whether the scale should begin at zero
+        scaleBeginAtZero : true,
+
+        //String - Colour of the angle line
+        angleLineColor : "rgba(0,0,0,.1)",
+
+        //Number - Pixel width of the angle line
+        angleLineWidth : 1,
+
+        //String - Point label font declaration
+        pointLabelFontFamily : "'Arial'",
+
+        //String - Point label font weight
+        pointLabelFontStyle : "normal",
+
+        //Number - Point label font size in pixels
+        pointLabelFontSize : 9,
+
+        //String - Point label font colour
+        pointLabelFontColor : "#666",
+
+        //Boolean - Whether to show a dot for each point
+        pointDot : true,
+
+        //Number - Radius of each point dot in pixels
+        pointDotRadius : 3,
+
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth : 1,
+
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius : 20,
+
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke : true,
+
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth : 2,
+
+        //Boolean - Whether to fill the dataset with a colour
+        datasetFill : true
+
+        //String - A legend template
+
+    }
+
+    var ctx1 = document.getElementById("radarChart1").getContext("2d");
+    var ctx2 = document.getElementById("radarChart2").getContext("2d");
+    var ctx3 = document.getElementById("radarChart3").getContext("2d");
+    var myRadarChart1 = new Chart(ctx1).Radar(data1, options);
+    var myRadarChart2 = new Chart(ctx2).Radar(data2, options);
+    var myRadarChart3 = new Chart(ctx3).Radar(data3, options);
+  </script>
+<% end %>

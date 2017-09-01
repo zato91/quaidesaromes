@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+      <h2 class="text-center">Le vin</h2>
+      <%= simple_form_for @wine do |f| %>
+        <%= f.input :estate, label: "Domaine" %>
+        <%= f.input :cuvee, label: "Cuvée" %>
+        <%= f.input :label, label: "Appelation" %>
+        <%= f.input :region, label: "Région" %>
+        <%= f.input :country, label: "Pays" %>
+        <%= f.input :vintage, label: "Millésime" %>
+        <%= f.input :grape_varieties, label: "Cépages" %>
+        <%= f.input :color, collection: ['Blanc', 'Rouge', 'Rosé'], label: "Couleur type" %>
+        <%= f.input :volume, label: "Volume" %>
+        <%= f.input :alcohol_percentage, label: "Alcool %"%>
+        <h2 class="text-center">La photo</h2>
+        <%= f.input :photo, as: :attachinary %>
+      </br>
+        <span class="flex padded-top padded-bot"><%= f.button :submit, "#{@submit_label}", class: "btn btn-primary" %></span>
+      <% end %>
+      </br>
+      </br>
+    </div>
+  </div>
+</div>

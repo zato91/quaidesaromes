@@ -1,0 +1,70 @@
+<div id="session">
+  <h3>FICHE D'IDENTIFICATION</h3>
+  <%= simple_form_for(:user, url: user_session_path, defaults: { input_html: { class: "modal-input" } }) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email, required: false, autofocus: true, label: "Email :" %>
+      <%= f.input :password, required: false, label: "Mot de passe :" %>
+      <%= f.input :remember_me, label: "Rester connecté(e)", as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "#{@label="Connexion"}", class: "sign-btn" %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+    <div class="fb-btn">
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: 'button_facebook' do %>
+        <i class="fa fa-facebook button_facebook_left"></i>
+        <span class="button_facebook_right"><%= "#{@label} #{OmniAuth::Utils.camelize(provider)}" %></span>
+      <% end %>
+    </div>
+    <% end -%>
+  <% end -%>
+  <hr>
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <%= link_to new_password_path(resource_name), class:"log-link" do %>
+    <div>Mot de passe oublié ?</div>
+    <% end %>
+  <% end -%>
+  <div class="small-padded text-center">
+    <%= link_to "Pas encore de compte", "#", class: "log-link", id: "trigger" %>
+  </div>
+    <%= link_to new_confirmation_path(resource_name), class:"log-link" do  %>
+  <div>Vous n'avez pas reçu le mail de confirmation ?</div>
+  <% end %>
+</div>
+
+<div id="registration" class="hidden">
+  <h3>FICHE D'IDENTIFICATION</h3>
+  <%= simple_form_for(:user, url: user_registration_path, defaults: { input_html: { class: "modal-input" } }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true, label: "Email :" %>
+      <%= f.input :first_name, required: false, label: "Prénom ou ce que tu veux :" %>
+      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: "Mot de passe :" %>
+      <%= f.input :password_confirmation, required: true, label: "Confirmer le mot de passe :" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "#{@label="Inscription"}", class: "sign-btn" %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+    <div class="fb-btn">
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: 'button_facebook' do %>
+        <i class="fa fa-facebook button_facebook_left"></i>
+        <span class="button_facebook_right"><%= "#{@label} #{OmniAuth::Utils.camelize(provider)}" %></span>
+      <% end %>
+    </div>
+    <% end -%>
+  <% end -%>
+  <hr>
+  <div class="text-center">
+    <%= link_to "Déjà inscrit ? Connectez-vous", "#", class: "log-link", id: "trigger_back" %>
+  </div>
+</div>

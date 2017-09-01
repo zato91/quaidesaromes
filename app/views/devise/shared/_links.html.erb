@@ -1,0 +1,44 @@
+  <%- if devise_mapping.omniauthable? %>
+<%- if controller_name == 'sessions' || controller_name == 'registrations'%>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+    <div class="fb-btn">
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: 'button_facebook' do %>
+        <i class="fa fa-facebook button_facebook_left"></i>
+        <span class="button_facebook_right"><%= "#{@label} #{OmniAuth::Utils.camelize(provider)}" %></span>
+      <% end %>
+    </div>
+    <% end -%>
+  <% end -%>
+<% end -%>
+
+<%- if controller_name != 'sessions' %>
+  <%= link_to new_session_path(resource_name), class:"log-link session" do %>
+    <div><hr>Déjà inscrit ? Connectez-vous</div>
+  <% end %>
+<% end -%>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to new_registration_path(resource_name), class:"log-link" do %>
+    <div>Pas encore inscrit ?</div>
+  <% end %>
+<% end -%>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to new_password_path(resource_name), class:"log-link" do %>
+  <div>Mot de passe oublié ?</div>
+  <% end %>
+<% end -%>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+
+  <%= link_to new_confirmation_path(resource_name), class:"log-link" do  %>
+  <div>Me souviens pas d'un mail de confirmation !</div>
+  <% end %>
+<% end -%>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to new_unlock_path(resource_name), class:"log-link" do %>
+  <div>Je suis locké mais je veux jouer !</div>
+  <% end %>
+<% end -%>
+

@@ -1,0 +1,51 @@
+.modal-backdrop {
+  z-index: -1 !important;
+}
+.modal-content {
+  margin-top: 10vh;
+}
+@media(max-width: 768px) {
+  .modal-content {
+    margin-top: 10px;
+  }
+}
+.modal-input {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: none;
+}
+.form-control:focus {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: 0;
+  box-shadow: none;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+.control-label {
+  font-family: 'Courier', 'Cousine', sans-serif;
+  margin: 0;
+}
+.form-actions {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.modal-body {
+  position: relative;
+}
+.modal-cross {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+}
+label.boolean.optional {
+  font-family: 'Courier', 'Cousine', sans-serif;
+}
+button[type="button"]:focus {
+  outline: none;
+}
+button.modal-close:hover {
+  color: $gray-light;
+}

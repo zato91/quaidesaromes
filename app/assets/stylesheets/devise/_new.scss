@@ -1,0 +1,39 @@
+.sign-content{
+  width: 50%;
+}
+.sign-content-white {
+  background: white;
+  // opacity: 1;
+  padding: 20px 50px 50px 50px;
+  border-radius: 1px;
+  hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+@media(max-width: 480px) {
+  .sign-content-white {
+    padding: 10px;
+  }
+}
+@media(max-width: 768px) {
+  .sign-content {
+    width: 70%;
+  }
+}
+@media(max-width: 480px) {
+  .sign-content {
+    width: 90%;
+    margin-top: $navbar-height;
+  }
+}
+#error_explanation {
+  font-size: 15px;
+  color: #a94442;
+  font-family: 'Courier', 'Cousine';
+  h2 {
+    font-size: 18px;
+    color: #a94442;
+    font-family: 'Courier', 'Cousine';
+  }
+}

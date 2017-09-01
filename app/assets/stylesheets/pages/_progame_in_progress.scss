@@ -1,0 +1,200 @@
+.game-cards {
+  a {
+    text-decoration: none;
+  }
+}
+.game-title {
+  h3 {
+    font-family: 'Courier', 'Cousine', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px;
+  }
+}
+.pro-home-punchline {
+  background-color: $yellow;
+  padding: 0 5vw;
+  margin: 0 -5vw;
+  transform: rotate(-4deg);
+  font-size: 7vw;
+  font-family: 'Impact', 'Oswald', sans-serif;
+  line-height: 7vw;
+  font-weight: bolder;
+  color: black;
+  text-align: center;
+  margin-top: 5vw;
+  margin-bottom: 25px;
+}
+.pro-game-card {
+  padding: 0px;
+  margin-bottom: 20px;
+  border: none;
+  color: #fff;
+  line-height: 21px;
+  border-radius: 2px;
+  // align-items: center;
+}
+.pro-game-card-content, .game-card-color {
+  h3 {
+    color: $red;
+    font-size: 15px;
+    font-weight: light;
+    text-transform: uppercase;
+    margin-top: 11px;
+    text-align: center;
+  }
+  h4 {
+    color: $gray-light;
+    font-size: 10px;
+  }
+  p {
+    color: $red;
+    line-height: 0.1em;
+    font-size: 12px;
+  }
+  span {
+    font-size: 12px;
+    color: gray;
+  }
+}
+.pro-game-card-content-left {
+  flex: 0 0 40%;
+  position: relative;
+  h3 {
+    color: $red;
+    font-size: 15px;
+    font-weight: light;
+    text-transform: uppercase;
+    margin-top: 11px;
+  }
+  h4 {
+    color: $red;
+    font-size: 15px;
+  }
+  p {
+    color: $red;
+    line-height: 0.1em;
+    font-size: 12px;
+  }
+  span {
+    font-size: 12px;
+    color: gray;
+  }
+}
+.game-card-img {
+  background: #fff center;
+  background-size: cover;
+  width: auto;
+  height: 70px;
+  position: relative;
+  .avatar-large {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  h3 {
+    margin: 0;
+    padding: 10px 0 0 10px;
+    color: grey;
+    font-size: 13px;
+    font-weight: light;
+    text-transform: uppercase;
+  }
+  h4 {
+    color: $red;
+    font-size: 15px;
+    padding: 0 0 10px 10px;
+  }
+}
+.game-card-img-dashed {
+  background: white;
+  border: 4px dashed black;
+  margin: 10px;
+}
+.player-card {
+  margin: 0 0 0 5px;
+  padding: 0;
+  h3 {
+    color: grey;
+    font-size: 15px;
+    font-weight: light;
+    text-transform: uppercase;
+    margin: 0 0 0 5px;
+  }
+  h4 {
+    color: grey;
+    font-size: 15px;
+  }
+}
+.player-card-content {
+  margin-bottom: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  h3 {
+    color: grey;
+    font-size: 15px;
+    font-weight: light;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+  }
+  h4 {
+    color: grey;
+    font-size: 15px;
+  }
+}
+.game-card-player {
+  padding: 5px;
+  margin: 0;
+  flex: 0 0 20%;
+  text-align: center;
+  .avatar-large {
+    width: 50px;
+    height: 50px;
+    background-color: grey;
+    margin: auto;
+    padding: 0;
+  }
+  h3 {
+    margin: 0;
+    padding: 5px 0 5px 10px;
+    color: grey;
+    font-size: 13px;
+    font-weight: light;
+    text-transform: uppercase;
+  }
+  h4 {
+    color: grey;
+    font-size: 15px;
+    padding: 0;
+  }
+}
+.game-card-color {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0px;
+}
+.game-dot {
+  height: 20px;
+  width: 20px;
+  margin: 10px;
+  border-radius: 50%;
+  &-red {
+    background: linear-gradient(to left, #77261B , #e74c3c);;
+  }
+  &-white {
+    background: linear-gradient(to left, #E4CA6D , #FAF2BB);
+  }
+  &-pink {
+    background: linear-gradient(to left, #DE6262 , #FFB88C);;
+  }
+}
+.password-show i {
+  font-size: 20px;
+  margin-bottom: 7px;
+}

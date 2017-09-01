@@ -1,0 +1,281 @@
+<div class="wine-banner">
+  <div class="wine-banner-content">
+    <div class='wine-punchline-container'>
+      <div class="home-punchline punch-bottom">
+        <h3>HISTORIQUE DE JEU</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="historic-cards">
+  <ul class="list-unstyled list">
+    <% @game_user_sessions.each_with_index do |gu, index| %>
+      <li class="list__item" style="position:relative">
+        <div class="list__item__inner">
+          <div class="historic-game-top-card">
+            <h3>Enquête bouclée
+            <% if ((Time.now - gu.updated_at) / 60) < 5 %>
+              <%= "il y a même pas 1 verre" %>
+            <% elsif ((Time.now - gu.updated_at) / 60) < 60 %>
+              <%= "ya pas longtemps" %>
+            <% else %>
+              <%= "depuis déjà un ptit moment!" %>
+            <% end %>
+            </h3>
+            <%#= link_to wine_path(gu.game_user.game.wine) do %>
+              <div class="historic-card-img-dashed">
+                <div class="historic-card-img" style="background-image: url('<%= gu.game_user.game.wine.photo ? cl_image_path(gu.game_user.game.wine.photo.path) : asset_path('temp_wine_img.png') %>')"></div>
+              </div>
+            <%# end %>
+            <div class="historic-data text-center">
+              <div class="historic-item border-right border-bottom">
+                <h4><i class="fa fa-university" aria-hidden="true"></i></h4>
+                <h5><%= gu.final_score %> pts</h5>
+              </div>
+              <div class="historic-item border-bottom border-left">
+                <% @players = GameUserSession.where(game_user_id: gu.game_user) %>
+                <% @players = @players.sort {|a, b| b[:final_score] <=> a[:final_score]} %>
+                <% @user_player = GameUserSession.where(game_user_id: gu.game_user).where(user: current_user).first %>
+                <% if @players.count > 1 %>
+                  <h4><i class="fa fa-trophy" aria-hidden="true"></i></h4>
+                  <% if @players.index(@user_player)+1 == 1 %>
+                    <h5><span style="font-weight:bolder;">1er</span> sur <%= @players.count %></h5>
+                  <% else %>
+                    <h5><span style="font-weight:bolder;"><%= @players.index(@user_player)+1 %>ème</span> sur <%= @players.count %></h5>
+                  <% end %>
+                <% else %>
+                  <h4><i class="fa fa-certificate" aria-hidden="true"></i></h4>
+                  <% if gu.final_score < 500 %>
+                    <h5>Même joueur joue encore!</h5>
+                  <% elsif gu.final_score < 1000 %>
+                    <h5>Pas ouf</h5>
+                  <% elsif gu.final_score < 1500 %>
+                    <h5>Pas mal</h5>
+                  <% elsif gu.final_score < 1900 %>
+                    <h5>Petit scarabée</h5>
+                  <% else %>
+                    <h5>Master of wine</h5>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="historic-data text-center">
+              <div class="historic-item border-right">
+                <h4><i class="fa fa-star" aria-hidden="true"></i></h4>
+                <h5><%= gu.rating.to_f %></h5>
+              </div>
+              <div class="historic-item border-left">
+                <!-- <h4>Match</h4> -->
+                <h4><svg id="fillgauge<%= index + 1 %>" width="10vh" height="10vh" style="vertical-align: middle;"></svg></h4>
+              </div>
+            </div>
+            <div class="historic-button-container text-center">
+              <i class="fa fa-plus-circle historic-button" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="historic-game-bottom-card">
+            <div class="color-aroma text-center">
+              <div class="color-aroma-item red-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Ta dégustation
+                  </li>
+                  <li class="font-bold">
+                    <% @tasting_color_question_id = Question.where(theme: "Regardez dans votre verre").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+                    <% @tasting_color_question_game_id = gu.game_user.question_games.where(question_id: @tasting_color_question_id).ids.first %>
+                    <% @tasting_color_answer_game_id = gu.user_answers.where(question_game_id: @tasting_color_question_game_id).last.answer_game_id %>
+                    <% @tasting_color_answer_id = AnswerGame.find(@tasting_color_answer_game_id).answer_id %>
+                    <% @tasting_color = Answer.find(@tasting_color_answer_id).value %>
+                    <% @aromas_family_question_id = Question.where(theme: "Sentez maintenant!").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+                    <% @aromas_family_question_game_id = gu.game_user.question_games.where(question_id: @aromas_family_question_id).ids.first %>
+                    <% @aromas_family_answer_game_id = gu.user_answers.where(question_game_id: @aromas_family_question_game_id).last.answer_game_id %>
+                    <% @aromas_family_answer_id = AnswerGame.find(@aromas_family_answer_game_id).answer_id %>
+                    <% @aromas_family = Answer.find(@aromas_family_answer_id).value %>
+                    <%= @tasting_color %>, <%= @aromas_family %>
+                  </li>
+                </ul>
+              </div>
+              <div class="color-aroma-item blue-list">
+                <ul class="list-unstyled">
+                  <li class="font-courier font-upper">
+                    Vin du coupable
+                  </li>
+                  <li class="font-bold">
+                    <% @guilty = GameSuspect.where(game_user_id: gu.game_user_id).where(wine: gu.game_user.game.wine).first %>
+                    <%= gu.game_user.game.wine.tasting_color %>, <%= Aroma.where(id: @guilty.aroma_id).first.name %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="wine-show-content text-center">
+              <canvas id="radarChart<%= index + 1 %>" class="canvas-card text"></canvas>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= content_for(:after_js) do %>
+  <script>
+    <% @game_user_sessions.each_with_index do |gu, index| %>
+      <% @guilty_sweetness = gu.game_user.game.wine.sweetness %>
+      <% @guilty_acidity = gu.game_user.game.wine.acidity %>
+      <% @guilty_tannins = gu.game_user.game.wine.tannins %>
+      <% @guilty_alcohol = gu.game_user.game.wine.alcohol %>
+      <% @guilty_body = gu.game_user.game.wine.body %>
+      <% @guilty_length = gu.game_user.game.wine.length %>
+      <% @sweetness_question_id = Question.where(theme: "Goutez maintenant! la douceur").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+      <% @sweetness_question_game_id = gu.game_user.question_games.where(question_id: @sweetness_question_id).ids.first %>
+      <% @sweetness_answer_game_id = gu.user_answers.where(question_game_id: @sweetness_question_game_id).last.answer_game_id %>
+      <% @sweetness_answer_id = AnswerGame.find(@sweetness_answer_game_id).answer_id %>
+      <% @sweetness = Answer.find(@sweetness_answer_id).value %>
+
+      <% @acidity_question_id = Question.where(theme: "Goutez! l'acidité").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+      <% @acidity_question_game_id = gu.game_user.question_games.where(question_id: @acidity_question_id).ids.first %>
+      <% @acidity_answer_game_id = gu.user_answers.where(question_game_id: @acidity_question_game_id).last.answer_game_id %>
+      <% @acidity_answer_id = AnswerGame.find(@acidity_answer_game_id).answer_id %>
+      <% @acidity = Answer.find(@acidity_answer_id).value %>
+
+      <% @alcohol_question_id = Question.where(theme: "Goutez! l'alcool").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+      <% @alcohol_question_game_id = gu.game_user.question_games.where(question_id: @alcohol_question_id).ids.first %>
+      <% @alcohol_answer_game_id = gu.user_answers.where(question_game_id: @alcohol_question_game_id).last.answer_game_id %>
+      <% @alcohol_answer_id = AnswerGame.find(@alcohol_answer_game_id).answer_id %>
+      <% @alcohol = Answer.find(@alcohol_answer_id).value %>
+
+      <% @body_question_id = Question.where(theme: "Goutez! le corps").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+      <% @body_question_game_id = gu.game_user.question_games.where(question_id: @body_question_id).ids.first %>
+      <% @body_answer_game_id = gu.user_answers.where(question_game_id: @body_question_game_id).last.answer_game_id %>
+      <% @body_answer_id = AnswerGame.find(@body_answer_game_id).answer_id %>
+      <% @body = Answer.find(@body_answer_id).value %>
+
+      <% if gu.game_user.game.wine.color.capitalize == "Blanc" %>
+        <% @label_4 = "Corps" %>
+        <% @label_5 = "Longueur" %>
+        <% @length_question_id = Question.where(theme: "Goutez! la longueur").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+        <% @length_question_game_id = gu.game_user.question_games.where(question_id: @length_question_id).ids.first %>
+        <% @length_answer_game_id = gu.user_answers.where(question_game_id: @length_question_game_id).last.answer_game_id %>
+        <% @length_answer_id = AnswerGame.find(@length_answer_game_id).answer_id %>
+        <% @length = Answer.find(@length_answer_id).value %>
+        <% @data_4 = @body %>
+        <% @data_5 = @length %>
+        <% @guilty_data_4 = @guilty_body %>
+        <% @guilty_data_5 = @guilty_length %>
+      <% else %>
+        <% @label_4 = "Tannins" %>
+        <% @label_5 = "Corps" %>
+        <% @tannins_question_id = Question.where(theme: "Goutez! les tannins").where(wine_color: gu.game_user.game.wine.color.capitalize).ids.first %>
+        <% @tannins_question_game_id = gu.game_user.question_games.where(question_id: @tannins_question_id).ids.first %>
+        <% @tannins_answer_game_id = gu.user_answers.where(question_game_id: @tannins_question_game_id).last.answer_game_id %>
+        <% @tannins_answer_id = AnswerGame.find(@tannins_answer_game_id).answer_id %>
+        <% @tannins = Answer.find(@tannins_answer_id).value %>
+        <% @data_4 = @tannins %>
+        <% @data_5 = @body %>
+        <% @guilty_data_4 = @guilty_tannins %>
+        <% @guilty_data_5 = @guilty_body %>
+      <% end %>
+      var data<%= index + 1 %> = {
+          labels: ["Douceur", "Acidité", "Alcool", '<%= @label_4 %>', '<%= @label_5 %>'],
+          datasets: [
+            {
+              label: "Ta dégustation",
+              fillColor: "rgba(199,90,90,0.5)",
+              strokeColor: "rgba(199,90,90,0.5)",
+              pointColor: "rgba(199,90,90,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(199,90,90,1)",
+              data: [<%= @sweetness %>,<%= @acidity %>,<%= @alcohol %>,<%= @data_4 %>,<%= @data_5 %>]
+            },
+            {
+              label: "Vin du coupable",
+              fillColor: "rgba(151,187,205,0.6)",
+              strokeColor: "rgba(151,187,205,1)",
+              pointColor: "rgba(151,187,205,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              data: [<%= @guilty_sweetness %>,<%= @guilty_acidity %>,<%= @guilty_alcohol %>,<%= @guilty_data_4 %>,<%= @guilty_data_5 %>]
+            }
+          ]
+      };
+
+      var options = {
+          //Boolean - Whether to show lines for each scale point
+          scaleShowLine : true,
+
+          //Boolean - Whether we show the angle lines out of the radar
+          angleShowLineOut : true,
+
+          //Boolean - Whether to show labels on the scale
+          scaleShowLabels : false,
+
+          // Boolean - Whether the scale should begin at zero
+          scaleBeginAtZero : true,
+
+          //String - Colour of the angle line
+          angleLineColor : "rgba(0,0,0,.1)",
+
+          //Number - Pixel width of the angle line
+          angleLineWidth : 1,
+
+          //String - Point label font declaration
+          pointLabelFontFamily : "'Arial'",
+
+          //String - Point label font weight
+          pointLabelFontStyle : "normal",
+
+          //Number - Point label font size in pixels
+          pointLabelFontSize : 12,
+
+          //String - Point label font colour
+          pointLabelFontColor : "#666",
+
+          //Boolean - Whether to show a dot for each point
+          pointDot : true,
+
+          //Number - Radius of each point dot in pixels
+          pointDotRadius : 3,
+
+          //Number - Pixel width of point dot stroke
+          pointDotStrokeWidth : 1,
+
+          //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+          pointHitDetectionRadius : 20,
+
+          //Boolean - Whether to show a stroke for datasets
+          datasetStroke : true,
+
+          //Number - Pixel width of dataset stroke
+          datasetStrokeWidth : 2,
+
+          //Boolean - Whether to fill the dataset with a colour
+          datasetFill : true
+
+          //String - A legend template
+      }
+
+      var ctx<%= index + 1 %> = document.getElementById("radarChart<%= index + 1 %>").getContext("2d");
+      var myRadarChart<%= index + 1 %> = new Chart(ctx<%= index + 1 %>).Radar(data<%= index + 1 %>, options);
+      var gauge1 = loadLiquidFillGauge("fillgauge<%= index + 1 %>", <%= gu.score %>);
+      var config1 = liquidFillGaugeDefaultSettings();
+    <% end %>
+    $(".historic-button").click(function(){
+      $topbutton = $(this);
+      console.log(($("i" , $topbutton)));
+      $content = $topbutton.parent().parent().next();
+      $content.slideToggle(500, function(){
+        //change text based on condition
+        if ($topbutton.hasClass('fa-plus-circle')) {
+          $topbutton.removeClass('fa-plus-circle');
+          $topbutton.addClass('fa-times-circle');
+        } else {
+          $topbutton.addClass('fa-plus-circle');
+          $topbutton.removeClass('fa-times-circle');
+        };
+      });
+    });
+  </script>
+<% end %>

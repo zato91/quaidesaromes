@@ -1,0 +1,68 @@
+<div class="wine-banner">
+  <div class="wine-banner-content">
+    <div class='wine-punchline-container'>
+      <div class="home-punchline punch-bottom">
+        <h3>LES PIECES A CONVICTION</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="no_result small-padded">
+  <% if @query != "no_search" && policy_scope(Wine).search_by_wine_description(params[:query]) == [] %>
+    <p class="text-center" style="font-weight: bolder">Aïe!! Aucun vin ne correspond! La flemme? Recommence donc une recherche!! Correctement, cette fois-ci!</p>
+  <% end %>
+</div>
+
+<% if @current_user != nil && policy(@wines).create? %>
+  <div class="container small-padded">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+          <%= link_to new_wine_path, class: "text-center" do %>
+            <div class="home-btn"><h4>Nouveau vin (admin)</h4></div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="wine-cards">
+  <div class="wine-title">
+    <h3>Liste des vins avec lesquels vous pouvez enquêter</h3>
+  </div>
+  <ul class="list-unstyled list">
+    <% @wines.each do |wine| %>
+      <li class="list__item">
+        <figure class="list__item__inner">
+          <%= link_to wine_path(wine) do %>
+            <div class="wine-card-hover">
+              <div class="wine-card-img-dashed">
+                <div class="wine-card-img" style="background-image: url('<%= wine.photo ? cl_image_path(wine.photo.path, :quality => 75) : asset_path('temp_wine_img.png') %>')"></div>
+              </div>
+              <figcaption>
+                <div class="wine-card-content">
+                  <div class="wine-card-color">
+                    <% if wine.color.capitalize == "Rouge" %>
+                      <div class="dot dot-red"></div>
+                    <% elsif wine.color.capitalize == "Blanc" %>
+                      <div class="dot dot-white"></div>
+                    <% else %>
+                      <div class="dot dot-pink"></div>
+                    <% end %>
+                  </div>
+
+                  <h4><%= wine.estate %></h4>
+                  <h3><%= wine.label %></h3>
+                  <p><%= wine.cuvee %></p>
+                  <h4><%= wine.region %>, <%= wine.country.capitalize %></h4>
+                  <p><%= wine.vintage %></p>
+                </div>
+              </figcaption>
+              </div>
+          <% end %>
+        </figure>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

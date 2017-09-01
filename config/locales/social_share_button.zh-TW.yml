@@ -1,0 +1,5 @@
+'zh-TW':
+  social_share_button:
+    share_to: 分享到 %{name}
+    facebook: Facebook
+    email: Email

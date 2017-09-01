@@ -1,0 +1,84 @@
+<div class="navbar-wagon">
+  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+    <%= image_tag("logo.png") %>
+  <% end %>
+
+  <% if action_name == "show" %>
+    <%=link_to wines_path(anchor: @wine.id), class:"navbar-back" do %>
+      <i class="fa fa-arrow-left"></i>
+    <% end %>
+  <% elsif action_name == "set_game" || action_name == "edit" && controller_name != "passwords" %>
+    <%=link_to wine_path(@wine), class:"navbar-back" do %>
+      <i class="fa fa-arrow-left"></i>
+    <% end %>
+  <% elsif action_name == "new" %>
+    <%=link_to wines_path, class:"navbar-back" do %>
+      <i class="fa fa-arrow-left"></i>
+    <% end %>
+  <% else %>
+    <%=link_to root_path, class:"navbar-back" do %>
+      <i class="fa fa-arrow-left"></i>
+    <% end %>
+  <% end %>
+
+  <div class="navbar-wagon-right">
+    <!-- Search bar -->
+    <form id="search_wine_form" action="/wines" class="searchbox">
+      <input type="text" name="query" class="searchbox-input" placeholder="Je cherche mon vin..." onkeyup="buttonUp();">
+      <input type="hidden" name="query_search" value="true">
+      <input type="submit" class="searchbox-submit" value="">
+      <span class="searchbox-icon"><i class="fa fa-search"></i></span>
+    </form>
+
+    <% if user_signed_in? %>
+      <div class="navbar-wagon-item">
+        <div class="dropdown">
+          <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu pullDown">
+            <li>
+              <%=link_to "Les vins du jeu", wines_path %>
+            </li>
+            <li>
+              <%= link_to "Mon historique de jeu", wine_game_user_game_user_sessions_path(:wine_id, :game_user_id) %>
+            </li>
+            <li>
+              <%= link_to "Les jeux en attente", game_in_progress_path %>
+            </li>
+            <li>
+              <%= link_to "Les jeux pro", progame_in_progress_path %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= t ".sign_out", default: "Déconnexion" %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% else %>
+      <!-- Button trigger modal -->
+      <button type="button" class="navbar-wagon-item navbar-wagon-link" data-toggle="modal" data-target="#myModal">
+        CONNEXION
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="modal-cross">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                </button>
+              </div>
+                <%= render 'devise/shared/registration_items' %>
+            </div>
+<!--             <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

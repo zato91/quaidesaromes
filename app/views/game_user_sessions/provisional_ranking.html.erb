@@ -1,0 +1,100 @@
+<div class="wrapper-quizz">
+  <div class="container kill-margin">
+    <div class="quizz-ranking-content">
+      <div class="quizz-ranking-content-top">
+        <div class="quizz-header">
+          <h3 class="text-center">Embauché!</h3>
+        </div>
+        <div class="quizz-ranking-quote">
+          <div class="win-lose-title text-center">
+            <% if @game_user_session.provisional_score >= 500 %>
+              <h3>"Pas mal, il faut passer à la pratique maintenant"</h3>
+            <% else %>
+              <h3>"Heureusement pour toi, j'ai personne d'autre sous la main!"</h3>
+            <% end %>
+            <h2 class="quote">- Edouard Pierce | Œnologue</h2>
+          </div>
+        </div>
+        <div class="quizz-ranking-score">
+          <div class="win-lose-title text-center">
+            <% if @players.count == 1 %>
+                <div class="win-lose-title">
+                  <h3>Chapître 1 : le recrutement</h3>
+                </div>
+                <div class="win-lose">
+                  <div class="win-lose-content">
+                    <h2><%= @game_user_session.provisional_score/100 %> bonnes réponses</h2>
+                  </div>
+                  <div class="win-lose-content">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                  </div>
+                  <div class="win-lose-content">
+                    <h2><%= @game_user_session.provisional_score %> pts</h2>
+                  </div>
+                </div>
+            <% else %>
+              <div class="win-lose-title">
+                <h3>Classement chapître 1</h3>
+              </div>
+              <table class="table table-condensed">
+                <% @players.each_with_index do |player, index| %>
+                  <% if @game.game_category.id == 3 %>
+                    <% if player.user == current_user %>
+                      <tr class="success">
+                    <% else %>
+                      <tr>
+                    <% end %>
+                      <td><h2><%= index + 1 %> - </h2></td>
+                      <% if player.photo %>
+                        <td><div class="avatar-large" style="background-image: url('<%= cl_image_path(player.photo.path, :width=>70, :height=>70, :gravity=>"face", :crop=>"thumb", :zoom=> 0.7) %>')"></div></td>
+                      <% else %>
+                        <td><div class="avatar-large"></div></td>
+                      <% end %>
+                      <% if player.team_name %>
+                        <td><h2><%= player.team_name.downcase.capitalize %></h2></td>
+                      <% else %>
+                      <% end %>
+                      <td><h2><%= player.provisional_score %> pts<h2></td>
+                    </tr>
+                  <% elsif @game.game_category.id == 1 %>
+                    <% if player.user == current_user %>
+                      <tr class="success">
+                    <% else %>
+                      <tr>
+                    <% end %>
+                      <td><h2><%= index + 1 %> - </h2></td>
+                      <% if player.user.picture %>
+                        <td><img src="<%= player.user.picture %>" alt="user" class="avatar-large"></td>
+                      <% else %>
+                        <td><div class="avatar-large"></div></td>
+                      <% end %>
+                      <% if player.user.first_name %>
+                        <td><h2><%= player.user.first_name.downcase.capitalize %></h2></td>
+                      <% else %>
+                        <% username = player.user.email.match(/^[^\@]*/) %>
+                        <td><h2>@<%= username %></h2></td>
+                      <% end %>
+                      <td><h2><%= player.provisional_score %> pts<h2></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </table>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center quizz-ranking-content-bottom">
+       <%= link_to "Je veux enquêteeeeeeer!!", intro_wine_game_user_game_user_session_path(params[:wine_id], params[:game_user_id], @game_user_session), class:'quizz-ranking-content-indice' %>
+    </div>
+  </div>
+</div>
+<!-- <div class="game-card-color"> -->
+<%# if gip.wine.color.capitalize == "Rouge" %>
+  <!-- <div class="game-dot dot-red"></div> -->
+<%# elsif gip.wine.color.capitalize == "Blanc" %>
+  <!-- <div class="game-dot dot-white"></div> -->
+<%# else %>
+  <!-- <div class="game-dot dot-pink"></div> -->
+<%# end %>
+<!-- </div> -->

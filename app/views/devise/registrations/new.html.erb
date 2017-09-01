@@ -1,0 +1,23 @@
+<div class="home-banner">
+  <div class="sign-content">
+    <div class="sign-content-white">
+      <h3>Fiche d'identification</h3>
+
+      <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), defaults: { input_html: { class: "modal-input" } }) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true, label: "Email :" %>
+          <%= f.input :first_name, label: "Prénom ou ce que tu veux :" %>
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: "Mot de passe :" %>
+          <%= f.input :password_confirmation, required: true, label: "Confirmer le mot de passe :" %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "#{@label="Inscription"}", class: "sign-btn" %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

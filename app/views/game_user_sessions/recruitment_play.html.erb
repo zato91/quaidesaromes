@@ -1,0 +1,26 @@
+<div class="wrapper-quizz">
+  <div class="container kill-margin">
+    <div class="quizz-content">
+
+      <div class="quizz-content-top">
+        <div class="quizz-header">
+          <h3 class="text-center"><%= @question.theme %></h3>
+        </div>
+
+        <div class="quizz-question text-center">
+          <% if @game_user_session.session_profile == "leader" || @players == 1 %>
+            <h4><%= @question.value %></h4>
+          <% else %>
+            <h4>Demandez la question au leader</h4>
+          <% end %>
+        </div>
+        <% if @question.typ == 'recruitment_qcm' %>
+          <%= render 'recruitment_qcm_question' %>
+        <% else %>
+          <%= render 'qcm_question' %>
+        <% end %>
+          <%#= render 'gauge_question' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.full-size-container {
+  height: 100vh;
+  padding: 0;
+  .item-full-size {
+    height: 100%;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: black;
+      opacity: .4;
+    }
+  }
+}
+
+

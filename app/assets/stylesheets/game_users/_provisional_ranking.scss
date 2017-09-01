@@ -1,0 +1,111 @@
+.quizz-ranking-score {
+  background: rgba(255, 255, 255, 0.9);
+  margin: 3vh auto 3vh auto;
+  width: 52vh;
+  min-height: 25vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  h4 {
+    text-transform: uppercase;
+  }
+  h3 {
+    margin: 2vh 0;
+  }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 3.8vh;
+    margin-top: 0;
+  }
+  table{
+    margin: 0;
+    line-height: 10vh;
+    td{
+      vertical-align: middle !important;
+    }
+  }
+}
+.quizz-ranking-quote {
+  background: rgba(255, 255, 255, 0.9);
+  margin: 13vh auto 3vh auto;
+  width: 52vh;
+  height: 25vh;
+  line-height: 25vh;
+  .win-lose-title {
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+.quizz-ranking-content {
+  background: image-url('home_banner.jpg') no-repeat center;
+  background-size: cover !important;
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  &-top {
+    width :100%;
+    margin: 0;
+  }
+  &-indice {
+    background: $red;
+    border-top: 4px solid $yellow;
+    color: white;
+    width :100%;
+    height: 10vh;
+    line-height: 10vh;
+    margin: 0;
+    font-size: 2.8vh;
+    text-transform: uppercase;
+    font-family: 'Courier', 'Cousine', sans-serif;
+    position: fixed;
+    bottom: 0;
+    left:0;
+  }
+  &-bottom {
+    width: 100%;
+    a, a:hover, a:focus {
+      color: white;
+      text-decoration: none !important;
+    }
+  }
+}
+.player-solo {
+  padding: 4vh;
+  .avatar-large {
+    width: 10vh;
+    height: 10vh;
+    margin: 10px auto;
+    background-color: grey;
+  }
+}
+table {
+margin: 0;
+line-height: 10vh;
+  td{
+    vertical-align: middle !important;
+  }
+  .avatar-large {
+    width: 10vh;
+    height: 10vh;
+    background-color: grey;
+    margin: auto;
+    padding: 0;
+  }
+  p {
+    margin-top: 12px;
+  }
+}

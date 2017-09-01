@@ -1,0 +1,38 @@
+<div class="home-banner">
+  <div class="home-banner-content">
+    <div class='home-punchline-container'>
+    <div class="home-logo">
+      <%= image_tag('logo.svg', class:'logo-width') %>
+    </div>
+      <div class="home-punchline">
+        QUAND POLICE ET VIN FONT BON MENAGE
+      </div>
+    </div>
+    <div class="home-banner-anchor">
+      <a href='#wrapper'><%= image_tag('arrow.svg') %></a>
+    </div>
+  </div>
+</div>
+<!-- <div class="home-position"> -->
+  <div class="home-wrapper bg-dark-grey" id='wrapper'>
+    <div class="home-infos-container">
+      <div class="home-infos text-center">
+        <p>Vous êtes l’enquêteur d’une affaire criminelle. 1 vin est retrouvé sur les lieux du crime. Goutez-le et grâce à lui désignez le coupable!!</p>
+        <%= social_share_button_tag("36 quai des aromes") %>
+      </div>
+    </div>
+    <div class="home-image text-center">
+      <%= image_tag('home_scene.png', class: "center fit") %>
+    </div>
+  </div>
+  <div class="home-game text-center">
+    <!-- <div class="home-game-bottle text-center"> -->
+      <%= link_to wines_path, class: "text-center" do %>
+      <%= image_tag('home_bottle.svg', height: '50%', width: '50%') %>
+        <div class="home-btn"><h4>J'enquête!</h4></div>
+      <% end %>
+
+
+    <!-- </div> -->
+  </div>
+<!-- </div> -->

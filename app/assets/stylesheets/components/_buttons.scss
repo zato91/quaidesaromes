@@ -1,0 +1,10 @@
+button {
+  background: transparent;
+  border: none;
+  &:hover {
+    color: $yellow;
+  }
+  &:focus {
+    border: none;
+  }
+}

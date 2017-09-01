@@ -1,0 +1,52 @@
+/* -------------------------------------
+ * Fonts
+ * ------------------------------------- */
+// Google fonts
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,700");
+@import url(https://fonts.googleapis.com/css?family=Cousine:400,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+$base-font: "Open Sans", "Courier", "sans-serif";
+$header-font: "Open Sans", "Cousine", "sans-serif";
+
+// Local fonts (uncomment following lines)
+// @font-face {
+//   font-family: "Font Name";
+//   src: font-url('FontFile.eot');
+//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
+//        font-url('FontFile.woff') format('woff'),
+//        font-url('FontFile.ttf') format('truetype')
+// }
+// $my-font: "Font Name";
+
+// Font-size and line-height
+$base-size: 16px;
+$base-height: 1.4;
+
+/* -------------------------------------
+ * Colors
+ * ------------------------------------- */
+// Scheme
+$brand-color: #D23333;
+
+$red: #F13339;
+$blue: #5A6EA6;
+$yellow: #FFF300;
+$orange: #E67E22;
+$green: #A0B278;
+$dark-grey: #313131;
+
+// Gray scale
+$gray-darker:  lighten(#000, 13.5%); // #222
+$gray-dark:    lighten(#000, 20%);   // #333
+$gray:         lighten(#000, 33.5%); // #555
+$gray-light:   lighten(#000, 46.7%); // #777
+$gray-lighter: lighten(#000, 93.5%); // #eee
+
+/* -------------------------------------
+ * Components
+ * ------------------------------------- */
+$footer-height: 100px;
+$navbar-height: 50px;
+$search-height: 30px;
+$logo-width: 315px;

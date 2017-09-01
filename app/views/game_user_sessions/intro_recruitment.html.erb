@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 full-size-container">
+      <div class='item-full-size carousel-left' style="background-image: url('<%= asset_path("carousel_1.jpg") %>')">
+      </div>
+      <div class='item-full-size-text'>
+        <div class='item-full-size-text-element'>
+          <h3>Chapître 1 : Le recrutement</h3></br>
+          </br>
+          <h4>Vous avez postulé pour un stage (si, si!!) chez un oenologue. Lors de votre entretien de recrutement, il vous pose quelques questions...</h4>
+        </div>
+      </div>
+      <div class="carousel-caption button-intro">
+        <%= link_to "Je veux jouuuueeeer!!", recruitment_play_wine_game_user_game_user_session_path(params[:wine_id], params[:game_user_id], params[:id], question_position: 0) , class:"carousel-btn" %>
+      </div>
+    </div>
+  </div>
+</div>
